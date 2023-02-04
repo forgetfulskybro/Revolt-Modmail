@@ -1,0 +1,25 @@
+const Thread = require('../../models/thread');
+const Embed = require("../../functions/embed")
+
+module.exports = {
+    config: {
+        name: "",
+        description: "",
+        usage: "",
+        category: "",
+        cooldown: 5000,
+        accessible: "",
+        aliases: []
+    },
+    run: async (client, message, args) => {
+                const recipientThread = await Thread.findOne({ channel: message.channel_id, closed: false });
+
+        const embed = new Embed()
+            .setColor("#1F9E96")
+            .setDescription(`${client.config.emojis.redTick} There's no concurring thread in this channel!`)
+        if (!recipientThread) return message.reply({ embeds: [embed] })
+
+
+    },
+};
+ 
