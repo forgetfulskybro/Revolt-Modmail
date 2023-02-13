@@ -7,7 +7,7 @@ module.exports = async (client, message) => {
     let args = message.content.slice(client.config.misc.prefix.length).trim().split(/ +/g);
     let cmd = args.shift().toLowerCase();
 
-    if (message.content && (new RegExp(`^(<@!?${client.config.misc.botID}>)`)).test(message.content)) return message.channel.sendMessage({
+    if (message.content && (new RegExp(`^(<@!?${client.user._id}>)`)).test(message.content)) return message.channel.sendMessage({
         content: `${client.config.emojis.greenTick} My current prefix is \`${client.config.misc.prefix}\``
     }).then(msg => setTimeout(() => msg.delete(), 7500));
 
