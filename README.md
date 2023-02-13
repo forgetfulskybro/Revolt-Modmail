@@ -9,7 +9,7 @@ The first Modmail bot that is made in Revolt. It provides features such as snipp
 - Run `npm i` which will download all necessary packages
 - Run the bot; Either use Node or PM2 (Process Manager 2)
   - `node index.js`
-  - `pm2 start index.js --name BridgeBot`
+  - `pm2 start index.js --name Modmail`
     - Download: `npm i pm2@latest -g`
 
 ## 🖥️ Screenshots
