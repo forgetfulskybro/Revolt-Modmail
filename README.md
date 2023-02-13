@@ -1,4 +1,4 @@
-# Revolt Bridge
+# Revolt Modmail
 The first Modmail bot that is made in Revolt. It provides features such as snippets, subbing to threads (pinged on every message), blocking/unblocking users, and displaying logs for each thread.
 
 ## 🚧 Procedures
