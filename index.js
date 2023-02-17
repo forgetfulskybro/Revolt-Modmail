@@ -19,4 +19,4 @@ mongoose.connect(mongoDB, {
 ["aliases", "commands", "events", "functions"].forEach(x => client[x] = new Collection());
 ["command", "event", "function"].forEach(x => require(`./handlers/${x}`)(client));
 
-client.loginBot(token); 
+client.loginBot(token);
