@@ -10,6 +10,15 @@ module.exports = async (client, message, newMsg) => {
         let pages = check.pages;
         let page = check.page;
         switch (newMsg.emoji_id) {
+            case "⏪":
+                if (page !== 0) {
+                    message.edit({
+                        embeds: [pages[0]]
+                    }).catch(() => { });
+                    return check.page = 0
+                } else {
+                    return;
+                }
             case "⬅️":
                 if (pages[page - 1]) {
                     message.edit({
@@ -25,6 +34,15 @@ module.exports = async (client, message, newMsg) => {
                         embeds: [pages[++page]]
                     }).catch(() => { });
                     return check.page = check.page + 1
+                } else {
+                    return;
+                }
+            case "⏩":
+                if (page !== pages.length) {
+                    message.edit({
+                        embeds: [pages[pages.length - 1]]
+                    }).catch(() => { });
+                    return check.page = pages.length - 1
                 } else {
                     return;
                 }

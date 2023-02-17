@@ -1,22 +1,26 @@
 class Paginator {
-    constructor(pages = [], { user, client }) {
-        this.pages = Array.isArray(pages) ? pages : [];
+    constructor({ user, client, timeout }) {
+        this.pages = [];
         this.client = client;
         this.user = user;
         this.page = 0;
-        this.timeout = 5 * 2e4;
+        this.timeout = timeout;
     }
 
     add(page) {
+        if (page.length) {
+            page.forEach((x) => { this.pages.push(x) });
+            return this;
+        }
         this.pages.push(page);
         return this;
     }
  
     async start(channel) {
         if (!this.pages.length) return;
-        const reactions = ["⬅️", "➡️"];
-        const message1 = await channel.sendMessage({ embeds: [this.pages[0]] });
-        await Promise.all(reactions.map((x, i) => { setTimeout(() => { message1.react(encodeURI(x)); }, i * 120); }));
+        const reactions = ["⏪", "⬅️", "➡️", "⏩"];
+        this.pages.forEach((e, i=0) => { e.description = `${e.description}\n\nPage ${i+1} / ${this.pages.length}` })
+        const message1 = await channel.sendMessage({ embeds: [this.pages[0]], interactions: { reactions } });
         this.client.paginate.set(this.user, { pages: this.pages, page: this.page, message: message1._id });
         setTimeout(() => { this.client.paginate.delete(this.user) }, this.timeout);
     }

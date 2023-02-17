@@ -1,15 +1,10 @@
 class Embed {
-    type = null;
     url = null;
-    special = null;
     title = null;
     description = null;
     image = null;
-    video = null;
-    site_name = null;
     icon_url = null;
     color = null;
-    footer = null;
     thumbnail = null;
 
     constructor(data) {

@@ -6,7 +6,7 @@ module.exports = {
 		accessible: "All",
 		category: "Management",
 		usage: `<input>`,
-		cooldown: 5000,
+		cooldown: 0,
 		aliases: ["e"]
 	},
 	run: async (client, message, args) => {

@@ -19,10 +19,9 @@ module.exports = {
             .setDescription(`${client.config.emojis.redTick} There's no concurring thread in this channel!`)
         if (!recipientThread) return message.reply({ embeds: [embed] })
 
-        const page = new Paginator([], { user: message.author._id, client: client })
-        page.add(embed);
-        page.add(embed2);
-        page.start(message.channel)
+        await new Paginator([], { timeout: 5 * 2e4, user: message.author._id, client: client })
+            .add([embed, embed2])
+            .start(message.channel);
     },
 };
  
