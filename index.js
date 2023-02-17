@@ -7,6 +7,7 @@ client.Uploader = new Uploader(client);
 client.cooldowns = new Map();
 client.used = new Map();
 client.config = require("./config");
+client.paginate = new Map();
 
 const mongoose = require("mongoose");
 mongoose.set('strictQuery', true)

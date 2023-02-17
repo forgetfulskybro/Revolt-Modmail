@@ -1,43 +1,25 @@
 class Paginator {
-    constructor(pages = [], {
-        filter,
-        timeout
-    } = {
-            timeout: 5 * 6e4
-        }) {
+    constructor(pages = [], { user, client }) {
         this.pages = Array.isArray(pages) ? pages : [];
-        this.timeout = Number(timeout) || 5 * 6e4;
+        this.client = client;
+        this.user = user;
         this.page = 0;
+        this.timeout = 5 * 2e4;
     }
 
     add(page) {
         this.pages.push(page);
         return this;
     }
-
-    setEndPage(page) {
-        if (page) this.endPage = page;
-        return this;
-    }
-
-    setTransform(fn) {
-        const _pages = []; 
-        let i = 0;
-        const ln = this.pages.length;
-        for (const page of this.pages) {
-            _pages.push(fn(page, i, ln));
-            i++;
-        }
-        this.pages = _pages;
-        return this;
-    }
-
-    async start(channel, buttons) {
+ 
+    async start(channel) {
         if (!this.pages.length) return;
-        const message1 = await channel.send({
-            embeds: [this.pages[0]],
-            components: [buttons]
-        });
-
+        const reactions = ["⬅️", "➡️"];
+        const message1 = await channel.sendMessage({ embeds: [this.pages[0]] });
+        await Promise.all(reactions.map((x, i) => { setTimeout(() => { message1.react(encodeURI(x)); }, i * 120); }));
+        this.client.paginate.set(this.user, { pages: this.pages, page: this.page, message: message1._id });
+        setTimeout(() => { this.client.paginate.delete(this.user) }, this.timeout);
     }
 }
+
+module.exports = Paginator;
