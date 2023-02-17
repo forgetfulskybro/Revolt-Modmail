@@ -16,7 +16,7 @@ The first Modmail bot that is made in Revolt. It provides features such as snipp
 
 - Account Information
 <img src="/assets/Account.png">
-
+ 
 - Blocking Users
 <img src="/assets/Blocked.png">
 
