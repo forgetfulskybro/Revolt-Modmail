@@ -108,7 +108,6 @@ dist
 .DS_Store
 .env
 node_modules
-config.js
 package.lock.json
 botconfig.json
 config.js
