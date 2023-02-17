@@ -109,9 +109,6 @@ dist
 .env
 node_modules
 config.js
-botconfig.json
 package.lock.json
 botconfig.json
 config.js
-config.js
-botconfig.json
