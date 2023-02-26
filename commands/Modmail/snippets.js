@@ -1,6 +1,6 @@
-const Thread = require('../../models/thread');
 const Snippet = require('../../models/snippet');
 const Embed = require("../../functions/embed")
+const Paginator = require('../../functions/pagination');
 
 module.exports = {
     config: {
@@ -38,13 +38,23 @@ module.exports = {
             if (!snipp) return message.reply({ content: `${client.config.emojis.redTick} Snippet \`${name}\` doesn't exist to delete!` })
             return message.reply({ content: `${client.config.emojis.greenTick} Successfully deleted snippet \`${name}\`` })
         } else if (type === "-view") {
-            let text = "";
             const snipp = await Snippet.find();
             if (snipp.length === 0) return message.reply({ content: `${client.config.emojis.redTick} There's currently no snippets to be displayed! You can create some by using \`${client.config.misc.prefix}snippets -add [SnippetName] [SnippetDescription]\`` })
-            for (let snip of snipp) {
-                text += `Name: ${snip.keyword}\nContent:\n${snip.content}\n\n`
-            }
-            return message.reply({ content: "### **Viewing Snippets**", attachments: [await client.Uploader.upload(Buffer.from(text), `Saved_Snippets.txt`)] });
+            const page = new Paginator({ timeout: 210000, user: message.author._id, client: client })
+            let data;
+            data = snipp.map(
+                (s, i) =>
+                    `**Name**: ${s.keyword}\n**Content**: ${s.content.slice(0, 600)}`
+            );
+            data = Array.from({
+                length: Math.ceil(data.length / 3)
+            },
+                (a, r) => data.slice(r * 3, r * 3 + 3)
+            );
+
+            Math.ceil(data.length / 3);
+            data = data.map(e => page.add(new Embed().setTitle("Viewing Snippets").setDescription(`${e.slice(0, 3).join("\n\n").toString()}`)))
+            page.start(message.channel)
         }
     },
 };
