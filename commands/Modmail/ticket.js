@@ -42,9 +42,12 @@ module.exports = {
             description: `**Recipient**: ${message.author.username} (Click to read more info)\n**ID**: ${message.author_id}\n**Issue**: ${args.join(" ")}\n**Created**: ${fetchTime(Date.now() - message.author.createdAt)}`,
         });
 
+        let cat = [];
         client.api.put(`/channels/${channel._id}/permissions/${client.config.roles.members}`, { "permissions": { "allow": 0, "deny": 1048576 } });
         client.api.put(`/channels/${channel._id}/permissions/${client.config.roles.management}`, { "permissions": { "allow": 1048576, "deny": 0 } });
         client.api.put(`/channels/${channel._id}/permissions/${client.config.roles.support}`, { "permissions": { "allow": 1048576, "deny": 0 } });
+        message.channel.server.categories.map(d => { if (d.id === client.config.tickets.category) d.channels.push(channel._id); cat.push(d) });
+        message.channel.server.edit({ categories: cat });
 
         const infoEmbed = new Embed()
             .setColor("#1F9E96")

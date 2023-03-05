@@ -10,6 +10,7 @@ const config = {
         "mainGuild": "", // Server ID
         "blocks": "", // Channel ID for modmail blocks
         "log": "", // Channel ID for modmail logging
+        "category": "", // Category channel ID - Check README on how to get this
     },
     "roles": {
         "management": "", // Role ID

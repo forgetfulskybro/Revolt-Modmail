@@ -12,6 +12,15 @@ The first Modmail bot that is made in Revolt. It provides features such as snipp
   - `pm2 start index.js --name Modmail`
     - Download: `npm i pm2@latest -g`
 
+## ❓ How to get category channel for config.js
+
+- Make sure the bot is running correctly
+- Make sure your ID is in the owner's area in config.js
+- Count how many catorgories you got starting at `0` and put that between `[]`, then run the code below: 
+```js
+message.channel.categories[<CategoryNumber>]
+```
+
 ## 🖥️ Screenshots
 
 - Account Information
