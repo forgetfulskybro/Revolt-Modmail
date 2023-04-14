@@ -16,7 +16,7 @@ The first Modmail bot that is made in Revolt. It provides features such as snipp
 
 - Make sure the bot is running correctly
 - Make sure your ID is in the owner's area in config.js
-- Count all of your categories to the category you want starting at 0. After you found the number, put that number between [] in the code below: 
+- Count all of your categories to the category you want starting at `0`. After you found the number, put that number between `[]` in the code below: 
 ```js
 !e message.channel.categories[<CategoryNumber>].id
 ```
